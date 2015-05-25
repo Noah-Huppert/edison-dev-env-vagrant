@@ -37,7 +37,7 @@ Vagrant.configure(2) do |config|
   # the path on the host to the actual folder. The second argument is
   # the path on the guest to mount the folder. And the optional third
   # argument is a set of non-required options.
-  config.vm.synced_folder "./code", "/home/vagrant/code"
+  # config.vm.synced_folder "./code", "/home/vagrant/code"
 
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
@@ -72,11 +72,18 @@ Vagrant.configure(2) do |config|
     sudo apt-get install gcc -y
     sudo apt-get install g++ -y
     sudo apt-get install gcc-multilib -y
-    sudo apt-get install build-essentials -y
+    sudo apt-get install build-essential -y
     sudo apt-get install make -y
     sudo apt-get install automake -y
+    # Install CMake
+    mkdir /home/vagrant/downloads
+    cd /home/vagrant/downloads
+    wget http://www.cmake.org/files/v3.2/cmake-3.2.2-Linux-x86_64.tar.gz
+    tar -zxvf cmake-3.2.2-Linux-x86_64.tar.gz
+    sudo cp -r --copy-contents cmake-3.2.2-Linux-x86_64 /opt
+    echo "PATH=$PATH:/opt/cmake-3.2.2-Linux-x86_64/bin" > /home/vagrant/.profile
     # Install Intel Edison SDK
-    cd /home/vagrant
+    cd /home/vagrant/downloads
     wget http://downloadmirror.intel.com/24910/eng/edison-sdk-linux64-ww18-15.zip
     unzip edison-sdk-linux64-ww18-15.zip
     sudo ./poky-edison-eglibc-x86_64-edison-image-core2-32-toolchain-1.6.1.sh -y
