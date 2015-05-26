@@ -87,6 +87,7 @@ Vagrant.configure(2) do |config|
     wget http://downloadmirror.intel.com/24910/eng/edison-sdk-linux64-ww18-15.zip
     unzip edison-sdk-linux64-ww18-15.zip
     sudo ./poky-edison-eglibc-x86_64-edison-image-core2-32-toolchain-1.6.1.sh -y
-    source /opt/poky-edison/1.6.1/environment-setup-core2-32-poky-linux
+    echo "#!/bin/sh\nsource /opt/poky-edison/1.6.1/environment-setup-core2-32-poky-linux;\nexit 0;" > /etc/rc.local
+    # source /opt/poky-edison/1.6.1/environment-setup-core2-32-poky-linux
   SHELL
 end
